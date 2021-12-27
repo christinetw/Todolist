@@ -6,13 +6,13 @@ import ToDoList from "./components/ToDoList";
 
 function App() {
   const [Input, setInput] = useState("");
-  const [todos,setTodos] =useState([]);
-
+  const [todos,setTodos] = useState([]);
+ 
   return (
     <div className="App">
       <header>To do list </header>
       <Form todos ={todos} setTodos ={setTodos} Input={Input} setInput={setInput} />
-      <ToDoList todos ={todos}/>
+      <ToDoList todos ={todos} setTodos={setTodos}/>
     </div>
   );
 }
