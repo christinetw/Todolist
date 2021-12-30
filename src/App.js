@@ -15,6 +15,7 @@ function App() {
     
     console.log('hey')
     filterHandler();
+    saveLocalTodos()
   }, [todos,status]);
 
   const filterHandler = () => {
@@ -31,7 +32,13 @@ function App() {
     }
 
   };
-  
+  const saveLocalTodos=()=>{
+    if(localStorage.getItem('todos')===null){
+      localStorage.setItem('todos',JSON.stringify([]))
+    }else{
+      localStorage.setItem('todos',JSON.stringify(todos));
+    }
+  }
   
   return (
     <div className="App">
