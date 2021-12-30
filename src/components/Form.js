@@ -4,7 +4,7 @@ import React from "react";
 
 
 
-const Form = ({ setInput, Input, todos, setTodos }) => {
+const Form = ({ setInput, Input, todos, setTodos ,setStatus}) => {
   const inputHandler = (e) => {
     setInput(e.target.value);
   }
@@ -14,6 +14,11 @@ const Form = ({ setInput, Input, todos, setTodos }) => {
     setTodos([...todos, { text: Input, completed: false, id: Math.random() * 1000 }]);
     setInput("");
   };
+  const statusHandler =(e)=>{
+    setStatus(e.target.value)
+
+
+  }
   return (
     <form>
       <input value={Input} onChange={inputHandler} type="text" className="todo-input" />
@@ -21,7 +26,7 @@ const Form = ({ setInput, Input, todos, setTodos }) => {
         <i className="fas fa-plus-square"></i>
       </button>
       <div className="select">
-        <select name="todos" className="filter-todo">
+        <select onChange={statusHandler}name="todos" className="filter-todo">
           <option value="all">All</option>
           <option value="completed">Completed</option>
           <option value="uncompleted">Uncompleted</option>
