@@ -5,18 +5,24 @@ import "./components/ToDoList";
 import ToDoList from "./components/ToDoList";
 
 function App() {
-  
-  
+
+
   const [Input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState('all');
   const [filterTodos, setFilterTodos] = useState([]);
+
   useEffect(() => {
-    
-    console.log('hey')
+    getLocalTodos();
+  }, []);
+
+
+  useEffect(() => {
+
+
     filterHandler();
     saveLocalTodos()
-  }, [todos,status]);
+  }, [todos, status]);
 
   const filterHandler = () => {
     switch (status) {
@@ -32,14 +38,20 @@ function App() {
     }
 
   };
-  const saveLocalTodos=()=>{
-    if(localStorage.getItem('todos')===null){
-      localStorage.setItem('todos',JSON.stringify([]))
-    }else{
-      localStorage.setItem('todos',JSON.stringify(todos));
-    }
+  const saveLocalTodos = () => {
+
+    localStorage.setItem('todos', JSON.stringify(todos));
+
   }
-  
+  const getLocalTodos = () => {
+    if (localStorage.getItem('todos') === null) {
+      localStorage.setItem('todos', JSON.stringify([]));
+    } else {
+      let localTodos = JSON.parse(localStorage.getItem('todos'))
+      setTodos(localTodos);
+    }
+
+  }
   return (
     <div className="App">
       <header>To do list </header>
@@ -54,6 +66,7 @@ function App() {
         todos={todos}
         setTodos={setTodos}
         filterTodos={filterTodos}
+        setFilterTodos={setFilterTodos}
       />
     </div>
   );
